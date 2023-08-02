@@ -42,3 +42,19 @@ else
         sudo systemctl start apache2
     fi
 fi
+
+
+git clone -b branch_name repository_url
+
+git add -A  # Stage all changes in the project directory
+git commit -m 'commit message'  # Create a commit with the staged changes with the commit message
+git remote add origin <url> # Add the remote repository with the given URL as 'origin'
+git remote -v # Show the list of remote repositories
+git push origin <branch_name> # Push the committed changes 
+
+
+<<<<<<< HEAD
+<local changes>
+=======
+Incoming changes from the remote branch
+>>>>>>> branch_name

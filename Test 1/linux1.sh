@@ -10,28 +10,20 @@ else
 fi
 
 # Check if 'httpd' is installed
-if command -v httpd >/dev/null 2>&1; then
-    echo "httpd is already installed."
+if command -v apache2 >/dev/null 2>&1 || command -v httpd >/dev/null 2>&1; then
+    echo "Apache HTTP Server is already installed."
 else
-    echo "httpd is not installed. Installing httpd..."
-    
-    # Install httpd based on the OS family
+    echo "Apache HTTP Server is not installed. Installing..."
+
+    # Install Apache HTTP Server based on the OS family
     if [[ $ID_LIKE == *"debian"* ]]; then
         # Debian-based distributions
-        sudo apt update
-        sudo apt install -y apache2
+        sudo apt-get update
+        sudo apt-get install -y apache2
     elif [[ $ID_LIKE == *"rhel fedora"* ]]; then
         # Red Hat-based distributions
         sudo yum update
         sudo yum install -y httpd
-    elif [[ $ID_LIKE == *"suse"* ]]; then
-        # SUSE-based distributions
-        sudo zypper refresh
-        sudo zypper install -y apache2
-    elif [[ $ID == "arch" || $ID_LIKE == *"archlinux"* ]]; then
-        # Arch Linux-based distributions
-        sudo pacman -Syu --noconfirm
-        sudo pacman -S --noconfirm apache
     else
         echo "Unsupported Linux distro. Please install 'httpd' manually."
         exit 1
@@ -39,10 +31,14 @@ else
 fi
 
 # Check the status of httpd application
-if sudo systemctl is-active httpd >/dev/null 2>&1; then
-    echo "httpd is running."
+if sudo systemctl is-active httpd >/dev/null 2>&1 || sudo systemctl is-active apache2 >/dev/null 2>&1; then
+    echo "Apache HTTP Server is running."
 else
     # Start httpd application if it's not running
-    echo "httpd is not running. Starting httpd..."
-    sudo systemctl start httpd
+    echo "Apache HTTP Server is not running. Starting..."
+    if sudo systemctl is-active httpd >/dev/null 2>&1; then
+        sudo systemctl start httpd
+    elif sudo systemctl is-active apache2 >/dev/null 2>&1; then
+        sudo systemctl start apache2
+    fi
 fi

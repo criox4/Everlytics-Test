@@ -11,11 +11,11 @@ fi
 
 # Check if 'httpd' is installed
 if command -v apache2 >/dev/null 2>&1 || command -v httpd >/dev/null 2>&1; then
-    echo "Apache HTTP Server is already installed."
+    echo "HTTPD is already installed."
 else
-    echo "Apache HTTP Server is not installed. Installing..."
+    echo "HTTPD is not installed. Installing..."
 
-    # Install Apache HTTP Server based on the OS family
+    # Install HTTPD based on the OS family
     if [[ $ID_LIKE == *"debian"* ]]; then
         # Debian-based distributions
         sudo apt-get update
@@ -32,10 +32,10 @@ fi
 
 # Check the status of httpd application
 if sudo systemctl is-active httpd >/dev/null 2>&1 || sudo systemctl is-active apache2 >/dev/null 2>&1; then
-    echo "Apache HTTP Server is running."
+    echo "HTTPD is running."
 else
     # Start httpd application if it's not running
-    echo "Apache HTTP Server is not running. Starting..."
+    echo "HTTPD is not running. Starting..."
     if sudo systemctl is-active httpd >/dev/null 2>&1; then
         sudo systemctl start httpd
     elif sudo systemctl is-active apache2 >/dev/null 2>&1; then

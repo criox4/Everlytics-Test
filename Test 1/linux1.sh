@@ -18,8 +18,8 @@ else
     # Install httpd based on the OS family
     if [[ $ID_LIKE == *"debian"* ]]; then
         # Debian-based distributions
-        sudo apt-get update
-        sudo apt-get install -y apache2
+        sudo apt update
+        sudo apt install -y apache2
     elif [[ $ID_LIKE == *"rhel fedora"* ]]; then
         # Red Hat-based distributions
         sudo yum update

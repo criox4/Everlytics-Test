@@ -58,3 +58,17 @@ git push origin <branch_name> # Push the committed changes
 =======
 Incoming changes from the remote branch
 >>>>>>> branch_name
+
+
+git add resolved_file1 resolved_file2
+
+git commit -m "Merge branch 'branch_name' into your_local_branch"
+
+git commit -m "Merge branch 'branch_name' into your_local_branch"
+
+
+git checkout -b new_local_branch_name origin/test_branch
+
+
+git push -u origin your_local_branch:master
+
